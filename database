@@ -1,0 +1,129 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct student {
+char name[20];
+int rollno;
+int m1, m2, m3;
+int total;
+float avg;
+} std[100], temp;
+int main() {
+int i, n, choice, ch1, rno, n1, no, j;
+char na[20]; // To hold the name for modification or search
+printf("Enter number of students:\n");
+scanf("%d", &n);
+for (i = 0; i < n; i++) {
+printf("Enter name of student:\n");
+scanf("%s", std[i].name);
+printf("Enter roll number of student:\n");
+scanf("%d", &std[i].rollno);
+printf("Enter marks of m1, m2, m3:\n");
+scanf("%d %d %d", &std[i].m1, &std[i].m2, &std[i].m3);
+}
+printf("Enter choice:\n");
+printf("1. Display\n2. Modify\n3. Append\n4. Search\n5. Sort\n");
+scanf("%d", &choice);
+switch (choice) {
+// Display students
+case 1:
+for (i = 0; i < n; i++) {
+printf("--------------------------------------------------------------\n");
+printf("\n%s \t\t%d \t\t%d \t\t%d \t\t%d", std[i].name, std[i].rollno, std[i].m1, std[i].m2, std[i].m3);
+printf("\n--------------------------------------------------------------\n");
+}
+break;
+// Modify student details
+case 2:
+printf("Enter choice for modification:\n");
+printf("1. Roll Number\n2. Name\n3. Marks\n");
+scanf("%d", &ch1);
+switch (ch1) {
+case 1:
+printf("Enter roll number to be modified:\n");
+scanf("%d", &rno);
+for (i = 0; i < n; i++) {
+if (std[i].rollno == rno) {
+printf("Enter new roll number:\n");
+scanf("%d", &std[i].rollno);
+}
+}
+break;
+case 2:
+printf("Enter name to be modified:\n");
+scanf("%s", na);
+for (i = 0; i < n; i++) {
+if (strcmp(std[i].name, na) == 0) {
+printf("Enter new name:\n");
+scanf("%s", std[i].name);
+}
+}
+break;
+case 3:
+printf("Enter roll number to modify marks:\n");
+scanf("%d", &rno);
+for (i = 0; i < n; i++) {
+if (std[i].rollno == rno) {
+printf("Enter new marks for m1, m2, m3:\n");
+scanf("%d %d %d", &std[i].m1, &std[i].m2, &std[i].m3);
+}
+}
+break;
+}
+break;
+// Append new students
+case 3:
+printf("Enter number of new entries to be added:\n");
+scanf("%d", &n1);
+int m = n + n1;
+for (i = n; i < m; i++) {
+printf("Enter name of student:\n");
+scanf("%s", std[i].name);
+printf("Enter roll number of student:\n");
+scanf("%d", &std[i].rollno);
+printf("Enter marks of m1, m2, m3:\n");
+scanf("%d %d %d", &std[i].m1, &std[i].m2, &std[i].m3);
+}
+n = m;
+// Display new data
+for (i = 0; i < n; i++) {
+printf("--------------------------------------------------------------\n");
+printf("\n%s \t\t%d \t\t%d \t\t%d \t\t%d", std[i].name, std[i].rollno, std[i].m1, std[i].m2, std[i].m3);
+printf("\n--------------------------------------------------------------\n");
+}
+break;
+// Search by roll number
+case 4:
+printf("Enter roll number to search:\n");
+scanf("%d", &no);
+for (i = 0; i < n; i++) {
+if (std[i].rollno == no) {
+printf("Record found at: %d\n", i + 1);
+}
+}
+break;
+// Sort by roll number
+case 5:
+for (i = 0; i < n - 1; i++) {
+for (j = 0; j < n - 1 - i; j++) {
+if (std[j].rollno > std[j + 1].rollno) {
+temp = std[j];
+std[j] = std[j + 1];
+std[j + 1] = temp;
+}
+}
+}
+// Display sorted data
+printf("Sorted students by roll number:\n");
+for (i = 0; i < n; i++) {
+printf("--------------------------------------------------------------\n");
+printf("\n%s \t\t%d \t\t%d \t\t%d \t\t%d", std[i].name, std[i].rollno, std[i].m1, std[i].m2, std[i].m3);
+printf("\n--------------------------------------------------------------\n");
+}
+break;
+default:
+printf("Invalid choice.\n");
+break;
+}
+return 0;
+}
