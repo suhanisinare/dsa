@@ -1,23 +1,67 @@
-#include <stdio.h>
-
-// Function to perform bubble sort
-void bubbleSort(int arr[], int n) {
-    int i, j, temp;
-
-    // Loop to access each element in the array
-    for (i = 0; i < n - 1; i++) {
-        // Last i elements are already sorted, no need to check them
-        for (j = 0; j < n - i - 1; j++) {
-            // If the current element is greater than the next, swap them
-            if (arr[j] > arr[j + 1]) {
-                temp = arr[j];
-                arr[j] = arr[j + 1];
-                arr[j + 1] = temp;
-            }
-        }
-    }
+#include<stdio.h>
+void main(){
+int i,j,temp,n,a[10],order=0,small=0,pos=0;
+printf("take array size:\n");
+scanf("%d",&n);
+for(i=0;i<n;i++){
+printf("take array elements:\n");
+scanf("%d",&a[i]);
 }
-
-// Function to print the array
-void printArray(int arr[], int size) {
-    for (int i = 0; i <
+printf("take order:\n");
+scanf("%d",&order);
+switch(order){
+case 1:
+//bubble sort
+for(i=0;i<n-1;i++){
+for(j=0;j<n-i-1;j++){
+if(a[j]>a[j+1]){
+temp=a[j];//swapping
+a[j]=a[j+1];
+a[j+1]=temp;
+}
+}
+}
+printf("sorted array is:\n");
+for(i=0;i<n;i++)
+printf("%d ",a[i]);
+break;
+case 2:
+//selection sort
+for(i=0;i<n-1;i++){
+small=a[i];
+pos=i;
+for(i=i+1;i<n;i++){
+if(a[j]<small){
+small=a[j];
+pos=j;
+}
+}
+temp=a[j];
+a[j]=a[i];
+a[i]=temp;
+}
+printf("sorted array is:\n");
+for(i=0;i<n;i++)
+printf("%d ",a[i]);
+break;
+case 3:
+//insertion sort
+for(i=1;i<n-1;i++){
+temp=a[i];
+for(j=i-1;j>=0;j--){
+if(temp<a[j]){
+a[j+1]=a[j];//shifting
+}else{
+break;
+}
+}
+a[j+1]=temp;//inserting element
+}
+printf("sorted array is:\n");
+for(i=0;i<n;i++)
+printf("%d ",a[i]);
+break;
+default:
+break;
+}
+}
