@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define MAX 5
+struct stack
+{
+int stk[MAX];
+int top;
+}st;
+int main(){
+int ch,i,num,x;
+st.top=-1;
+do{
+printf("\n1]PUSH\n2]POP\n3]DISPLAY\n4]EXIT\n");
+scanf("%d",&ch);
+switch(ch)
+{
+case 1:
+if(st.top==MAX-1)
+{
+printf("\nTHE STACK IS FULL");
+}
+else {
+printf("\nENTER THE NUMBER :");
+scanf("%d",&num);
+st.top++;
+st.stk[st.top]=num;
+}
+break;
+case 2:
+if(st.top==-1)
+{
+printf("THE STACK IS EMPTY");
+}
+else{
+x=st.stk[st.top];
+st.top--;
+printf("ELEMENT POPED IS: %d",x);
+}
+break;
+case 3:
+printf("\nELEMENTS OF THE STACK ARE ");
+for(i=st.top;i>=0;i--)
+{
+printf("\n%d",st.stk[i]);
+}
+break;
+default : exit(0);
+}
+}while(ch!=4);
+return 0;
+}
