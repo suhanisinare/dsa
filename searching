@@ -1,0 +1,53 @@
+#include<stdio.h>
+int main(){
+int i,n,a[10],flag=0,key,min,max,mid,order;
+printf("take size of array:\n");
+scanf("%d",&n);
+printf("take elements of array:\n");
+for(i=0;i<n;i++){
+scanf("%d",&a[i]);
+}
+printf("enter order:\n");
+scanf("%d",&order);
+switch(order){
+case 1:
+printf("enter key:\n");
+scanf("%d",&key);
+for(i=0;i<n;i++){
+if(key==a[i]){
+flag=1;
+break;
+}
+}
+if(flag==1){
+printf("element %d found at %d\n",key,i+1);
+}else{
+printf("element not found\n");
+}
+break;
+case 2:
+printf("enter key:\n");
+scanf("%d",&key);
+min=0;
+max=n-1;
+while(min<=max){
+mid=(min+max)/2;
+if(key==a[mid]){
+flag=1;
+break;
+}else if(key>a[mid]){
+min=mid+1;
+}else{
+max=mid-1;
+}
+}
+if(flag==1){
+printf("element %d found at %d\n",key,mid+1);
+}else{
+printf("element not found\n");
+}
+break;
+default:
+break;
+}
+}
