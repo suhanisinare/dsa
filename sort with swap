@@ -1,0 +1,92 @@
+#include<stdio.h>
+
+void main() {
+    int i, j, temp, n, a[10], order = 0, small = 0, pos = 0;
+    int iterations = 0, swaps = 0; // Initialize counters for iterations and swaps
+
+    printf("Enter array size: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++) {
+        printf("Enter array element %d: ", i + 1);
+        scanf("%d", &a[i]);
+    }
+
+    printf("Enter order (1 for Bubble Sort, 2 for Selection Sort, 3 for Insertion Sort): ");
+    scanf("%d", &order);
+
+    switch(order) {
+        case 1: // Bubble Sort
+            for(i = 0; i < n - 1; i++) {
+                for(j = 0; j < n - i - 1; j++) {
+                    iterations++;  // Count the iterations
+                    if(a[j] > a[j + 1]) {
+                        // Swap
+                        temp = a[j];
+                        a[j] = a[j + 1];
+                        a[j + 1] = temp;
+                        swaps++;  // Count the swaps
+                    }
+                }
+            }
+            printf("Bubble Sort - Sorted array is:\n");
+            for(i = 0; i < n; i++) {
+                printf("%d ", a[i]);
+            }
+            printf("\nIterations: %d, Swaps: %d\n", iterations, swaps);
+            break;
+
+        case 2: // Selection Sort
+            iterations = 0;  // Reset counters for selection sort
+            swaps = 0;
+            for(i = 0; i < n - 1; i++) {
+                small = a[i];
+                pos = i;
+                for(j = i + 1; j < n; j++) {
+                    iterations++;  // Count the iterations
+                    if(a[j] < small) {
+                        small = a[j];
+                        pos = j;
+                    }
+                }
+                // Swap
+                if(pos != i) {
+                    temp = a[pos];
+                    a[pos] = a[i];
+                    a[i] = temp;
+                    swaps++;  // Count the swaps
+                }
+            }
+            printf("Selection Sort - Sorted array is:\n");
+            for(i = 0; i < n; i++) {
+                printf("%d ", a[i]);
+            }
+            printf("\nIterations: %d, Swaps: %d\n", iterations, swaps);
+            break;
+
+        case 3: // Insertion Sort
+            iterations = 0;  // Reset counters for insertion sort
+            swaps = 0;
+            for(i = 1; i < n; i++) {
+                temp = a[i];
+                j = i - 1;
+                while(j >= 0 && a[j] > temp) {
+                    iterations++;  // Count the iterations
+                    a[j + 1] = a[j]; // Shift
+                    j--;
+                    swaps++;  // Count the shifts as swaps (shifting elements)
+                }
+                a[j + 1] = temp;  // Insert element
+            }
+            printf("Insertion Sort - Sorted array is:\n");
+            for(i = 0; i < n; i++) {
+                printf("%d ", a[i]);
+            }
+            printf("\nIterations: %d, Swaps: %d\n", iterations, swaps);
+            break;
+
+        default:
+            printf("Invalid option.\n");
+            break;
+    }
+}
