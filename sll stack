@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-	
+
 // Define the structure for a stack node
 struct Node {
     int data;
@@ -27,8 +27,8 @@ int pop(struct Node** top) {
         return -1;
     }
     struct Node* temp = *top;
-    int popped = temp->data;
     *top = (*top)->next;
+    int popped = temp->data;
     free(temp);
     return popped;
 }
@@ -48,18 +48,40 @@ void display(struct Node* top) {
 }
 
 int main() {
-    struct Node* top = NULL;
+    struct Node* stack = NULL;
+    int choice, value;
 
-    push(&top, 10);
-    push(&top, 20);
-    push(&top, 30);
+    while (1) {
+        printf("\n1. Push\n2. Pop\n3. Display\n4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-    printf("Stack elements: ");
-    display(top);
-
-    printf("%d popped from stack\n", pop(&top));
-    printf("Stack elements after pop: ");
-    display(top);
+        switch (choice) {
+            case 1:
+                printf("Enter value to push: ");
+                scanf("%d", &value);
+                push(&stack, value);
+                break;
+            case 2:
+                value = pop(&stack);
+                if (value != -1) {
+                    printf("Popped value: %d\n", value);
+                }
+                break;
+            case 3:
+                display(stack);
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Invalid choice\n");
+        }
+    }
 
     return 0;
 }
+
+
+
+    
+   
